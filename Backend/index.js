@@ -10,10 +10,6 @@ const app = express();
 
 app.use(express.json());
 
-app.get('/', (req, res)=>{
-    res.send('Hello, World!');
-})
-
 app.get("/api/auth", authRouter);
 
 app.listen(process.env.PORT, (req, res) => {
