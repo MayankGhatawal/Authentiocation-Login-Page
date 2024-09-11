@@ -1,5 +1,6 @@
 import { User } from '../Models/user.models.js'
 import bcrypt from 'bcrypt';
+import { generateVerificationCode } from '../utils/generateVerificationCode.js'
 
 export const signup = async (req, res) => {
     const { email, name, password } = req.body;
