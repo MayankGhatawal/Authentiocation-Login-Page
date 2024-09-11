@@ -15,12 +15,18 @@ export const signup = async (req, res) => {
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        const verificationCode = generateVerificationCode();
+        const verificationToken = generateVerificationCode();
         const user = new User({
             email,
             password: hashedPassword,
-            name
+            name,
+            verificationToken,
+            verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000 // 24 HOURS,
+
         })
+        await user.save();
+        // jwt
+        generateTokenAndSetCookie(res, user._id)
     } catch (error) {
         res.status(404).json({message: error.message});
     }
