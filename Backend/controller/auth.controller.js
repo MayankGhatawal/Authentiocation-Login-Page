@@ -13,7 +13,13 @@ export const signup = async (req, res) => {
             return res.status(400).json({success:false ,message: 'User already exists'})
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10)
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const verificationCode = generateVerificationCode();
+        const user = new User({
+            email,
+            password: hashedPassword,
+            name
+        })
     } catch (error) {
         res.status(404).json({message: error.message});
     }
