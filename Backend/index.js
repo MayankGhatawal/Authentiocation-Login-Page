@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import {connectDB} from './DB/connectDB.js';
 
-import router from './Routes/auth.route.js';
+import authRouter from './Routes/auth.route.js';
 
 dotenv.config();
 
@@ -14,7 +14,7 @@ app.get('/', (req, res)=>{
     res.send('Hello, World!');
 })
 
-app.get("/api/auth", router);
+app.get("/api/auth", authRouter);
 
 app.listen(process.env.PORT, (req, res) => {
     connectDB();
